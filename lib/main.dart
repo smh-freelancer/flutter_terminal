@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -40,7 +42,7 @@ class _TerminalViewState extends State<TerminalView> {
   final FocusNode _focusNode = FocusNode();
 
   void _processCommand(String input) {
-    setState(() {
+    setState(() async {
       _history.add('\$ $input');
       final parts = input.trim().split(' ');
       final cmd = parts[0];
@@ -69,7 +71,21 @@ class _TerminalViewState extends State<TerminalView> {
           _history.add('A terminal emulator UI built with Flutter.');
           break;
         default:
-          _history.add('Command not found: $cmd');
+          // Attempt to run the command on the host OS (Desktop only)
+          try {
+            final result = await Process.run(cmd, parts.sublist(1));
+            if (result.stdout.toString().isNotEmpty) {
+              _history.add(result.stdout.toString().trim());
+            }
+            if (result.stderr.toString().isNotEmpty) {
+              _history.add('Error: ${result.stderr.toString().trim()}');
+            }
+          } catch (e) {
+            _history.add(
+              'Failed to execute command (Mobile OS sandbox restriction or invalid command).',
+            );
+          }
+        // _history.add('Command not found: $cmd');
       }
       _history.add(''); // Add empty line for the next prompt
     });
