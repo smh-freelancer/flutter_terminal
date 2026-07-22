@@ -1,0 +1,47 @@
+# OS and editor files
+.DS_Store
+*.swp
+*.swo
+*.iml
+*.ipr
+*.iws
+.idea/
+.vscode/
+
+# Logs and temporary files
+*.log
+*.tmp
+*.class
+*.pyc
+.history/
+.buildlog/
+
+# Dart and Flutter tooling
+.dart_tool/
+.packages
+.pub/
+.pub-cache/
+.flutter-plugins
+.flutter-plugins-dependencies
+build/
+coverage/
+**/doc/api/
+
+# Generated platform files
+android/.gradle/
+android/local.properties
+android/app/debug/
+android/app/profile/
+android/app/release/
+ios/Flutter/Generated.xcconfig
+ios/Flutter/ephemeral/
+ios/Flutter/flutter_export_environment.sh
+ios/Runner/GeneratedPluginRegistrant.h
+ios/Runner/GeneratedPluginRegistrant.m
+macos/Flutter/ephemeral/
+linux/flutter/ephemeral/
+windows/flutter/ephemeral/
+
+# Build symbols and obfuscation maps
+app.*.symbols
+app.*.map.json
